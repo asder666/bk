@@ -6,387 +6,112 @@
 <title>BK Калькулятор ЗП</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
-    --bg: #0f0f0f;
-    --surface: #1a1a1a;
-    --surface2: #242424;
-    --border: #2e2e2e;
-    --accent: #d4600a;
-    --accent2: #f5a623;
-    --green: #4caf7d;
-    --text: #e8e8e8;
-    --muted: #666;
-    --radius: 10px;
+    --bg: #0f0f0f; --surface: #1a1a1a; --surface2: #242424;
+    --border: #2e2e2e; --accent: #d4600a; --accent2: #f5a623;
+    --green: #4caf7d; --red: #e05555; --blue: #5b9cf6;
+    --text: #e8e8e8; --muted: #666; --radius: 10px;
   }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    min-height: 100vh;
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 4px;
-  }
-
-  .subtitle {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-bottom: 20px;
-  }
-
-  /* TABS */
-  .tabs {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 18px;
-  }
-
-  .tab {
-    padding: 7px 16px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--muted);
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .tab.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-    font-weight: 600;
-  }
-
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; padding: 16px; }
+  h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent2); margin-bottom: 2px; }
+  .subtitle { font-size: 0.75rem; color: var(--muted); margin-bottom: 16px; }
+  .tabs { display: flex; gap: 5px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tab { padding: 6px 13px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-size: 0.78rem; cursor: pointer; transition: all 0.15s; }
+  .tab.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-
-  /* CARDS */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 12px;
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; }
+  .card-title { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .form-row { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 10px; }
+  .form-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-group label { font-size: 0.7rem; color: var(--muted); }
+  input[type="date"], input[type="time"], input[type="number"], input[type="text"] {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    border-radius: 6px; padding: 7px 10px; font-size: 0.85rem; outline: none; transition: border-color 0.15s;
   }
-
-  .card-title {
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 6px;
-  }
-
-  /* ADD SHIFT FORM */
-  .form-row {
-    display: flex;
-    gap: 8px;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .form-group label {
-    font-size: 0.7rem;
-    color: var(--muted);
-  }
-
-  input[type="date"],
-  input[type="time"] {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: 6px;
-    padding: 7px 10px;
-    font-size: 0.85rem;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
-  input[type="date"]:focus,
-  input[type="time"]:focus {
-    border-color: var(--accent);
-  }
-
-  .btn {
-    padding: 8px 18px;
-    border-radius: 6px;
-    border: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: opacity 0.15s;
-  }
-
+  input:focus { border-color: var(--accent); }
+  .btn { padding: 8px 16px; border-radius: 6px; border: none; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
   .btn:hover { opacity: 0.85; }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-  }
-
-  .btn-danger {
-    background: transparent;
-    color: #e05555;
-    border: 1px solid #e05555;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    border-radius: 4px;
-  }
-
-  /* SHIFTS LIST */
-  .shift-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    background: var(--surface2);
-    border-radius: 8px;
-    margin-bottom: 6px;
-    border-left: 3px solid var(--accent);
-  }
-
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .btn-danger { background: transparent; color: var(--red); border: 1px solid var(--red); padding: 4px 9px; font-size: 0.72rem; border-radius: 4px; }
+  .btn-edit { background: transparent; color: var(--blue); border: 1px solid var(--blue); padding: 4px 9px; font-size: 0.72rem; border-radius: 4px; }
+  .btn-sm { padding: 5px 10px; font-size: 0.75rem; }
+  .shift-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--surface2); border-radius: 8px; margin-bottom: 6px; border-left: 3px solid var(--accent); }
   .shift-info { flex: 1; }
-
-  .shift-date {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 2px;
-  }
-
-  .shift-time {
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-
-  .shift-meta {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .shift-pay {
-    text-align: right;
-    margin-left: 12px;
-  }
-
-  .shift-pay .amount {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--green);
-  }
-
-  .shift-pay .hours {
-    font-size: 0.72rem;
-    color: var(--muted);
-  }
-
-  .burger-tag {
-    background: var(--accent);
-    color: #fff;
-    font-size: 0.65rem;
-    padding: 2px 6px;
-    border-radius: 10px;
-    margin-left: 6px;
-  }
-
-  /* WEEK CALENDAR */
-  .week-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-  }
-
-  .week-label {
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-
-  .btn-nav {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: 6px;
-    padding: 5px 12px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: border-color 0.15s;
-  }
-
+  .shift-date { font-size: 0.78rem; color: var(--muted); margin-bottom: 2px; }
+  .shift-time { font-size: 0.92rem; font-weight: 600; }
+  .shift-meta { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .shift-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; margin-left: 10px; }
+  .shift-pay-amount { font-size: 0.95rem; font-weight: 700; color: var(--green); }
+  .btn-row { display: flex; gap: 5px; }
+  .week-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .week-label { font-size: 0.88rem; font-weight: 600; }
+  .btn-nav { background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 5px 11px; cursor: pointer; font-size: 0.78rem; }
   .btn-nav:hover { border-color: var(--accent); }
-
-  .week-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-  }
-
-  .day-cell {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 8px 4px;
-    text-align: center;
-    min-height: 80px;
-    border: 1px solid var(--border);
-    transition: border-color 0.15s;
-  }
-
-  .day-cell.has-shift {
-    border-color: var(--accent);
-  }
-
-  .day-cell.today {
-    border-color: var(--accent2);
-  }
-
-  .day-name {
-    font-size: 0.65rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .day-num {
-    font-size: 1rem;
-    font-weight: 700;
-    margin: 2px 0 4px;
-  }
-
-  .day-pay {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--green);
-  }
-
-  .day-hours {
-    font-size: 0.65rem;
-    color: var(--muted);
-  }
-
-  /* TOTALS */
-  .totals-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 14px;
-  }
-
-  .total-box {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 12px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-
-  .total-box .val {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--green);
-  }
-
-  .total-box .lbl {
-    font-size: 0.7rem;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .week-total-bar {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-top: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid var(--accent);
-  }
-
-  .week-total-bar .lbl { font-size: 0.8rem; color: var(--muted); }
-  .week-total-bar .val { font-size: 1.2rem; font-weight: 800; color: var(--green); }
-
-  /* MONTH */
-  .month-week {
-    margin-bottom: 12px;
-  }
-
-  .month-week-header {
-    font-size: 0.72rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
-    padding-left: 4px;
-  }
-
-  /* ALL TIME */
-  .alltime-big {
-    text-align: center;
-    padding: 24px 0 16px;
-  }
-
-  .alltime-big .val {
-    font-size: 2.4rem;
-    font-weight: 900;
-    color: var(--green);
-    line-height: 1;
-  }
-
-  .alltime-big .lbl {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-top: 6px;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 24px;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-
-  .rate-info {
-    font-size: 0.72rem;
-    color: var(--muted);
-    text-align: right;
-    margin-bottom: 8px;
-  }
-
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 12px 0;
-  }
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  .day-cell { background: var(--surface2); border-radius: 8px; padding: 7px 3px; text-align: center; min-height: 76px; border: 1px solid var(--border); }
+  .day-cell.has-shift { border-color: var(--accent); }
+  .day-cell.today { border-color: var(--accent2); }
+  .day-name { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; }
+  .day-num { font-size: 0.95rem; font-weight: 700; margin: 2px 0 3px; }
+  .day-pay { font-size: 0.68rem; font-weight: 600; color: var(--green); }
+  .day-hours { font-size: 0.62rem; color: var(--muted); }
+  .totals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .total-box { background: var(--surface2); border-radius: 8px; padding: 11px; text-align: center; border: 1px solid var(--border); }
+  .total-box .val { font-size: 1.2rem; font-weight: 800; color: var(--green); }
+  .total-box .lbl { font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
+  .total-bar { background: var(--surface2); border-radius: 8px; padding: 11px 14px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--accent); }
+  .total-bar .lbl { font-size: 0.78rem; color: var(--muted); }
+  .total-bar .val { font-size: 1.15rem; font-weight: 800; color: var(--green); }
+  .month-week { margin-bottom: 10px; }
+  .month-week-header { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; padding-left: 3px; }
+  .alltime-big { text-align: center; padding: 20px 0 14px; }
+  .alltime-big .val { font-size: 2.2rem; font-weight: 900; color: var(--green); line-height: 1; }
+  .alltime-big .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 5px; }
+  .empty-state { text-align: center; padding: 20px; color: var(--muted); font-size: 0.82rem; }
+  .divider { height: 1px; background: var(--border); margin: 12px 0; }
+  .preview-box { font-size: 0.78rem; color: var(--accent2); margin-top: 6px; padding: 6px 10px; background: var(--surface2); border-radius: 6px; display: none; }
+  .preview-box.show { display: block; }
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.show { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; width: 90%; max-width: 400px; }
+  .modal-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 14px; color: var(--accent2); }
+  .modal-actions { display: flex; gap: 8px; margin-top: 14px; justify-content: flex-end; }
+  /* RATE HISTORY */
+  .rate-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--surface2); border-radius: 7px; margin-bottom: 5px; }
+  .rate-item .rate-val { font-weight: 700; color: var(--accent2); }
+  .rate-item .rate-date { font-size: 0.75rem; color: var(--muted); }
+  /* PAYDAY */
+  .payday-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--surface2); border-radius: 8px; margin-bottom: 6px; border-left: 3px solid var(--blue); }
+  .payday-item .pd-date { font-size: 0.78rem; color: var(--muted); }
+  .payday-item .pd-amount { font-size: 0.95rem; font-weight: 700; color: var(--blue); }
+  .payday-item .pd-note { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .compare-box { background: var(--surface2); border-radius: 8px; padding: 12px; margin-top: 10px; border: 1px solid var(--border); }
+  .compare-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .compare-row:last-child { margin-bottom: 0; }
+  .compare-row .clbl { font-size: 0.75rem; color: var(--muted); }
+  .compare-row .cval { font-size: 0.9rem; font-weight: 700; }
+  .cval.green { color: var(--green); }
+  .cval.blue { color: var(--blue); }
+  .cval.red { color: var(--red); }
+  .cval.yellow { color: var(--accent2); }
+  /* EXPORT */
+  textarea.export-area { width: 100%; height: 120px; background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 8px; font-size: 0.75rem; font-family: monospace; resize: vertical; outline: none; }
 </style>
 </head>
 <body>
 
 <h1>🍔 BK Калькулятор ЗП</h1>
-<p class="subtitle">Ставка: 240 руб/ч</p>
+<p class="subtitle" id="current-rate-label">Загрузка...</p>
 
 <div class="tabs">
   <button class="tab active" onclick="switchTab('week')">Неделя</button>
   <button class="tab" onclick="switchTab('month')">Месяц</button>
   <button class="tab" onclick="switchTab('alltime')">Всё время</button>
   <button class="tab" onclick="switchTab('add')">+ Смена</button>
+  <button class="tab" onclick="switchTab('settings')">⚙️</button>
 </div>
 
 <!-- ADD SHIFT -->
@@ -406,11 +131,12 @@
         <label>Конец</label>
         <input type="time" id="inp-end">
       </div>
-      <button class="btn btn-primary" onclick="addShift()">Добавить</button>
     </div>
-    <div id="add-preview" style="font-size:0.8rem; color: var(--muted);"></div>
+    <div class="preview-box" id="add-preview"></div>
+    <div style="margin-top:10px">
+      <button class="btn btn-primary" onclick="addShift()">Добавить смену</button>
+    </div>
   </div>
-
   <div class="card">
     <div class="card-title">Все смены</div>
     <div id="all-shifts-list"></div>
@@ -425,19 +151,13 @@
     <button class="btn-nav" onclick="changeWeek(1)">След →</button>
   </div>
   <div class="week-grid" id="week-grid"></div>
-  <div class="week-total-bar">
+  <div class="total-bar">
     <span class="lbl">Итого за неделю</span>
     <span class="val" id="week-total">0 ₽</span>
   </div>
   <div class="totals-grid">
-    <div class="total-box">
-      <div class="val" id="week-hours">0ч</div>
-      <div class="lbl">Оплачиваемых часов</div>
-    </div>
-    <div class="total-box">
-      <div class="val" id="week-burgers">0 🍔</div>
-      <div class="lbl">Бесплатных обедов</div>
-    </div>
+    <div class="total-box"><div class="val" id="week-hours">0ч</div><div class="lbl">Оплач. часов</div></div>
+    <div class="total-box"><div class="val" id="week-burgers">0 🍔</div><div class="lbl">Обедов</div></div>
   </div>
 </div>
 
@@ -460,81 +180,154 @@
     </div>
     <div class="divider"></div>
     <div class="totals-grid">
-      <div class="total-box">
-        <div class="val" id="alltime-shifts">0</div>
-        <div class="lbl">Смен отработано</div>
+      <div class="total-box"><div class="val" id="alltime-shifts">0</div><div class="lbl">Смен</div></div>
+      <div class="total-box"><div class="val" id="alltime-hours">0ч</div><div class="lbl">Оплач. часов</div></div>
+      <div class="total-box"><div class="val" id="alltime-burgers">0 🍔</div><div class="lbl">Обедов</div></div>
+      <div class="total-box"><div class="val" id="alltime-avg">0 ₽</div><div class="lbl">Средняя смена</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="tab-settings" class="tab-content">
+  <!-- Ставка -->
+  <div class="card">
+    <div class="card-title">Ставка в час</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Ставка (руб/ч)</label>
+        <input type="number" id="inp-rate" placeholder="240" style="width:110px">
       </div>
-      <div class="total-box">
-        <div class="val" id="alltime-hours">0ч</div>
-        <div class="lbl">Оплачиваемых часов</div>
+      <div class="form-group">
+        <label>Дата изменения</label>
+        <input type="date" id="inp-rate-date">
       </div>
-      <div class="total-box">
-        <div class="val" id="alltime-burgers">0 🍔</div>
-        <div class="lbl">Бесплатных обедов</div>
+      <button class="btn btn-primary btn-sm" onclick="addRate()">Сохранить</button>
+    </div>
+    <div id="rate-history"></div>
+  </div>
+
+  <!-- Payday -->
+  <div class="card">
+    <div class="card-title">Выплаты (Payday)</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Дата выплаты</label>
+        <input type="date" id="inp-pd-date">
       </div>
-      <div class="total-box">
-        <div class="val" id="alltime-avg">0 ₽</div>
-        <div class="lbl">Средняя смена</div>
+      <div class="form-group">
+        <label>Сумма (руб)</label>
+        <input type="number" id="inp-pd-amount" placeholder="5000" style="width:110px">
       </div>
+      <div class="form-group">
+        <label>Комментарий</label>
+        <input type="text" id="inp-pd-note" placeholder="Аванс / ЗП" style="width:120px">
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="addPayday()">Добавить</button>
+    </div>
+    <div id="payday-list"></div>
+  </div>
+
+  <!-- Экспорт/Импорт -->
+  <div class="card">
+    <div class="card-title">Резервная копия</div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+      <button class="btn btn-secondary btn-sm" onclick="exportData()">📋 Копировать данные</button>
+      <button class="btn btn-secondary btn-sm" onclick="showImport()">📥 Восстановить</button>
+    </div>
+    <div id="import-area" style="display:none">
+      <textarea class="export-area" id="import-text" placeholder="Вставь сюда скопированные данные..."></textarea>
+      <div style="margin-top:8px;display:flex;gap:8px">
+        <button class="btn btn-primary btn-sm" onclick="importData()">Восстановить</button>
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('import-area').style.display='none'">Отмена</button>
+      </div>
+    </div>
+    <div id="export-result" style="font-size:0.75rem;color:var(--green);margin-top:6px"></div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <div class="modal-title">Редактировать смену</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Дата</label>
+        <input type="date" id="edit-date">
+      </div>
+      <div class="form-group">
+        <label>Начало</label>
+        <input type="time" id="edit-start">
+      </div>
+      <div class="form-group">
+        <label>Конец</label>
+        <input type="time" id="edit-end">
+      </div>
+    </div>
+    <div class="preview-box show" id="edit-preview"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+      <button class="btn btn-primary" onclick="saveEdit()">Сохранить</button>
     </div>
   </div>
 </div>
 
 <script>
-const RATE = 240;
 const DAYS_RU = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
 const MONTHS_RU = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 
+// Загрузка данных
 let shifts = JSON.parse(localStorage.getItem('bk_shifts') || '[]');
+let rates = JSON.parse(localStorage.getItem('bk_rates') || '[{"date":"2020-01-01","rate":240}]');
+let paydays = JSON.parse(localStorage.getItem('bk_paydays') || '[]');
 let currentWeekOffset = 0;
 let currentMonthOffset = 0;
+let editIdx = -1;
 
-function saveShifts() {
+function save() {
   localStorage.setItem('bk_shifts', JSON.stringify(shifts));
+  localStorage.setItem('bk_rates', JSON.stringify(rates));
+  localStorage.setItem('bk_paydays', JSON.stringify(paydays));
 }
 
-// Логика расчёта смены
-function calcShift(startTime, endTime) {
+// Получить ставку на конкретную дату
+function getRateForDate(dateStr) {
+  const sorted = [...rates].sort((a,b) => b.date.localeCompare(a.date));
+  const r = sorted.find(r => r.date <= dateStr);
+  return r ? r.rate : 240;
+}
+
+function getCurrentRate() {
+  return getRateForDate(dateKey(new Date()));
+}
+
+function updateRateLabel() {
+  const r = getCurrentRate();
+  document.getElementById('current-rate-label').textContent = `Текущая ставка: ${r} руб/ч`;
+}
+
+// Логика расчёта
+function calcShift(startTime, endTime, rate) {
   const [sh, sm] = startTime.split(':').map(Number);
   const [eh, em] = endTime.split(':').map(Number);
   let totalMins = (eh * 60 + em) - (sh * 60 + sm);
-  if (totalMins < 0) totalMins += 24 * 60; // переход через полночь
+  if (totalMins < 0) totalMins += 24 * 60;
 
-  let deductMins = 0;
-  let bonusMins = 0;
-  let lunches = 0;
+  let deductMins = 0, bonusMins = 0, lunches = 0;
 
-  // Пороги в минутах
-  if (totalMins >= 10 * 60 + 30) {       // ≥ 10ч 30м
-    deductMins = 30;
-    bonusMins = 30;
-    lunches = 2;
-  } else if (totalMins >= 8 * 60 + 30) { // ≥ 8ч 30м
-    deductMins = 30;
-    bonusMins = 15;
-    lunches = 1;
-  } else if (totalMins >= 4 * 60 + 30) { // ≥ 4ч 30м
-    deductMins = 30;
-    bonusMins = 0;
-    lunches = 1;
-  } else if (totalMins >= 2 * 60 + 15) { // ≥ 2ч 15м
-    deductMins = 15;
-    bonusMins = 0;
-    lunches = 0;
+  if (totalMins >= 10 * 60 + 30) {
+    deductMins = 30; bonusMins = 30; lunches = 2;
+  } else if (totalMins >= 8 * 60 + 30) {
+    deductMins = 30; bonusMins = 15; lunches = 1;
+  } else if (totalMins >= 4 * 60 + 30) {
+    deductMins = 30; bonusMins = 0; lunches = 1;
+  } else if (totalMins >= 2 * 60 + 15) {
+    deductMins = 15; bonusMins = 0; lunches = 0;
   }
 
   const paidMins = totalMins - deductMins + bonusMins;
-  const pay = Math.round((paidMins / 60) * RATE);
-
-  return {
-    totalMins,
-    paidMins,
-    deductMins,
-    bonusMins,
-    lunches,
-    pay,
-    paidHours: (paidMins / 60).toFixed(2)
-  };
+  const pay = Math.round((paidMins / 60) * rate);
+  return { totalMins, paidMins, deductMins, bonusMins, lunches, pay, rate };
 }
 
 function formatMins(mins) {
@@ -543,68 +336,200 @@ function formatMins(mins) {
   return m > 0 ? `${h}ч ${m}м` : `${h}ч`;
 }
 
+function dateKey(d) {
+  return d.toISOString().slice(0,10);
+}
+
+// ДОБАВИТЬ СМЕНУ
 function addShift() {
   const date = document.getElementById('inp-date').value;
   const start = document.getElementById('inp-start').value;
   const end = document.getElementById('inp-end').value;
   if (!date || !start || !end) return alert('Заполни все поля!');
-
-  const calc = calcShift(start, end);
+  const rate = getRateForDate(date);
+  const calc = calcShift(start, end, rate);
   shifts.push({ date, start, end, ...calc });
-  shifts.sort((a, b) => a.date.localeCompare(b.date));
-  saveShifts();
+  shifts.sort((a,b) => a.date.localeCompare(b.date));
+  save();
   renderAll();
-  document.getElementById('add-preview').textContent = '';
+  document.getElementById('add-preview').classList.remove('show');
 }
 
+// УДАЛИТЬ СМЕНУ
 function deleteShift(idx) {
   if (!confirm('Удалить смену?')) return;
   shifts.splice(idx, 1);
-  saveShifts();
+  save();
   renderAll();
 }
 
-// Preview при вводе
+// РЕДАКТИРОВАТЬ СМЕНУ
+function openEdit(idx) {
+  editIdx = idx;
+  const s = shifts[idx];
+  document.getElementById('edit-date').value = s.date;
+  document.getElementById('edit-start').value = s.start;
+  document.getElementById('edit-end').value = s.end;
+  updateEditPreview();
+  document.getElementById('edit-modal').classList.add('show');
+}
+
+function updateEditPreview() {
+  const start = document.getElementById('edit-start').value;
+  const end = document.getElementById('edit-end').value;
+  const date = document.getElementById('edit-date').value;
+  if (start && end && date) {
+    const rate = getRateForDate(date);
+    const c = calcShift(start, end, rate);
+    document.getElementById('edit-preview').textContent =
+      `${formatMins(c.totalMins)} факт → оплач ${formatMins(c.paidMins)} · ${c.pay} ₽ · 🍔${c.lunches} · ставка ${rate} руб/ч`;
+  }
+}
+
+function saveEdit() {
+  const date = document.getElementById('edit-date').value;
+  const start = document.getElementById('edit-start').value;
+  const end = document.getElementById('edit-end').value;
+  if (!date || !start || !end) return alert('Заполни все поля!');
+  const rate = getRateForDate(date);
+  const calc = calcShift(start, end, rate);
+  shifts[editIdx] = { date, start, end, ...calc };
+  shifts.sort((a,b) => a.date.localeCompare(b.date));
+  save();
+  closeModal();
+  renderAll();
+}
+
+function closeModal() {
+  document.getElementById('edit-modal').classList.remove('show');
+  editIdx = -1;
+}
+
+['edit-start','edit-end','edit-date'].forEach(id => {
+  document.getElementById(id).addEventListener('change', updateEditPreview);
+});
+
+// PREVIEW при добавлении
 ['inp-start','inp-end','inp-date'].forEach(id => {
   document.getElementById(id).addEventListener('change', () => {
     const s = document.getElementById('inp-start').value;
     const e = document.getElementById('inp-end').value;
-    if (s && e) {
-      const c = calcShift(s, e);
-      document.getElementById('add-preview').textContent =
-        `→ ${formatMins(c.totalMins)} | Оплач: ${formatMins(c.paidMins)} | ${c.pay} ₽ | 🍔 ${c.lunches}`;
+    const d = document.getElementById('inp-date').value;
+    if (s && e && d) {
+      const rate = getRateForDate(d);
+      const c = calcShift(s, e, rate);
+      const box = document.getElementById('add-preview');
+      box.textContent = `${formatMins(c.totalMins)} факт → оплач ${formatMins(c.paidMins)} · ${c.pay} ₽ · 🍔${c.lunches} · ставка ${rate} руб/ч`;
+      box.classList.add('show');
     }
   });
 });
 
+// СТАВКИ
+function addRate() {
+  const rate = parseFloat(document.getElementById('inp-rate').value);
+  const date = document.getElementById('inp-rate-date').value;
+  if (!rate || !date) return alert('Заполни ставку и дату!');
+  rates.push({ date, rate });
+  rates.sort((a,b) => a.date.localeCompare(b.date));
+  save();
+  renderSettings();
+  updateRateLabel();
+  document.getElementById('inp-rate').value = '';
+}
+
+function deleteRate(idx) {
+  if (rates.length <= 1) return alert('Нельзя удалить последнюю ставку!');
+  if (!confirm('Удалить ставку?')) return;
+  rates.splice(idx, 1);
+  save();
+  renderSettings();
+  updateRateLabel();
+}
+
+// PAYDAY
+function addPayday() {
+  const date = document.getElementById('inp-pd-date').value;
+  const amount = parseFloat(document.getElementById('inp-pd-amount').value);
+  const note = document.getElementById('inp-pd-note').value || '';
+  if (!date || !amount) return alert('Заполни дату и сумму!');
+  paydays.push({ date, amount, note });
+  paydays.sort((a,b) => a.date.localeCompare(b.date));
+  save();
+  renderSettings();
+  renderMonth();
+  document.getElementById('inp-pd-amount').value = '';
+  document.getElementById('inp-pd-note').value = '';
+}
+
+function deletePayday(idx) {
+  if (!confirm('Удалить выплату?')) return;
+  paydays.splice(idx, 1);
+  save();
+  renderSettings();
+  renderMonth();
+}
+
+// EXPORT / IMPORT
+function exportData() {
+  const data = JSON.stringify({ shifts, rates, paydays }, null, 2);
+  navigator.clipboard.writeText(data).then(() => {
+    document.getElementById('export-result').textContent = '✓ Скопировано в буфер! Сохрани в заметку Obsidian.';
+    setTimeout(() => document.getElementById('export-result').textContent = '', 3000);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = data;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    document.getElementById('export-result').textContent = '✓ Скопировано!';
+    setTimeout(() => document.getElementById('export-result').textContent = '', 3000);
+  });
+}
+
+function showImport() {
+  document.getElementById('import-area').style.display = 'block';
+}
+
+function importData() {
+  try {
+    const text = document.getElementById('import-text').value.trim();
+    const data = JSON.parse(text);
+    if (data.shifts) shifts = data.shifts;
+    if (data.rates) rates = data.rates;
+    if (data.paydays) paydays = data.paydays;
+    save();
+    renderAll();
+    renderSettings();
+    updateRateLabel();
+    document.getElementById('import-area').style.display = 'none';
+    document.getElementById('import-text').value = '';
+    document.getElementById('export-result').textContent = '✓ Данные восстановлены!';
+    setTimeout(() => document.getElementById('export-result').textContent = '', 3000);
+  } catch(e) {
+    alert('Ошибка! Проверь что данные скопированы полностью.');
+  }
+}
+
+// RENDER FUNCTIONS
 function getWeekStart(offset = 0) {
   const now = new Date();
-  const day = now.getDay(); // 0=вс
+  const day = now.getDay();
   const mon = new Date(now);
   mon.setDate(now.getDate() - (day === 0 ? 6 : day - 1) + offset * 7);
   mon.setHours(0,0,0,0);
   return mon;
 }
 
-function changeWeek(dir) {
-  currentWeekOffset += dir;
-  renderWeek();
-}
-
-function changeMonth(dir) {
-  currentMonthOffset += dir;
-  renderMonth();
-}
-
-function dateKey(d) {
-  return d.toISOString().slice(0,10);
-}
+function changeWeek(dir) { currentWeekOffset += dir; renderWeek(); }
+function changeMonth(dir) { currentMonthOffset += dir; renderMonth(); }
 
 function renderWeek() {
   const weekStart = getWeekStart(currentWeekOffset);
   const weekEnd = new Date(weekStart);
   weekEnd.setDate(weekStart.getDate() + 6);
-
   const startStr = weekStart.toLocaleDateString('ru', { day:'numeric', month:'short' });
   const endStr = weekEnd.toLocaleDateString('ru', { day:'numeric', month:'short' });
   document.getElementById('week-label').textContent = `${startStr} — ${endStr}`;
@@ -612,7 +537,6 @@ function renderWeek() {
   const today = dateKey(new Date());
   const grid = document.getElementById('week-grid');
   grid.innerHTML = '';
-
   let weekPay = 0, weekPaidMins = 0, weekLunches = 0;
 
   for (let i = 0; i < 7; i++) {
@@ -620,25 +544,21 @@ function renderWeek() {
     d.setDate(weekStart.getDate() + i);
     const key = dateKey(d);
     const dayShifts = shifts.filter(s => s.date === key);
-
-    const dayPay = dayShifts.reduce((s, x) => s + x.pay, 0);
-    const dayMins = dayShifts.reduce((s, x) => s + x.paidMins, 0);
-    const dayLunches = dayShifts.reduce((s, x) => s + x.lunches, 0);
-
-    weekPay += dayPay;
-    weekPaidMins += dayMins;
-    weekLunches += dayLunches;
+    const dayPay = dayShifts.reduce((s,x) => s+x.pay, 0);
+    const dayMins = dayShifts.reduce((s,x) => s+x.paidMins, 0);
+    const dayLunches = dayShifts.reduce((s,x) => s+x.lunches, 0);
+    weekPay += dayPay; weekPaidMins += dayMins; weekLunches += dayLunches;
 
     const cell = document.createElement('div');
     cell.className = 'day-cell' + (dayShifts.length ? ' has-shift' : '') + (key === today ? ' today' : '');
     cell.innerHTML = `
-      <div class="day-name">${DAYS_RU[(d.getDay())]}</div>
+      <div class="day-name">${DAYS_RU[d.getDay()]}</div>
       <div class="day-num">${d.getDate()}</div>
       ${dayShifts.length ? `
-        <div class="day-pay">${dayPay} ₽</div>
+        <div class="day-pay">${dayPay}₽</div>
         <div class="day-hours">${formatMins(dayMins)}</div>
-        ${dayLunches ? `<div style="font-size:0.65rem;margin-top:2px">🍔${dayLunches}</div>` : ''}
-      ` : `<div class="day-hours" style="margin-top:8px">—</div>`}
+        ${dayLunches ? `<div style="font-size:0.6rem;margin-top:1px">🍔${dayLunches}</div>` : ''}
+      ` : `<div class="day-hours" style="margin-top:8px;font-size:0.8rem">—</div>`}
     `;
     grid.appendChild(cell);
   }
@@ -651,17 +571,24 @@ function renderWeek() {
 function renderMonth() {
   const now = new Date();
   const target = new Date(now.getFullYear(), now.getMonth() + currentMonthOffset, 1);
-  document.getElementById('month-label').textContent = `${MONTHS_RU[target.getMonth()]} ${target.getFullYear()}`;
+  const yr = target.getFullYear(), mo = target.getMonth();
+  document.getElementById('month-label').textContent = `${MONTHS_RU[mo]} ${yr}`;
 
   const monthShifts = shifts.filter(s => {
     const d = new Date(s.date);
-    return d.getFullYear() === target.getFullYear() && d.getMonth() === target.getMonth();
+    return d.getFullYear() === yr && d.getMonth() === mo;
   });
+
+  // Выплаты за этот месяц
+  const monthStart = `${yr}-${String(mo+1).padStart(2,'0')}-01`;
+  const monthEnd = `${yr}-${String(mo+1).padStart(2,'0')}-31`;
+  const monthPaydays = paydays.filter(p => p.date >= monthStart && p.date <= monthEnd);
+  const totalPaid = monthPaydays.reduce((s,x) => s+x.amount, 0);
 
   const container = document.getElementById('month-content');
 
-  if (!monthShifts.length) {
-    container.innerHTML = '<div class="empty-state">Нет смен в этом месяце</div>';
+  if (!monthShifts.length && !monthPaydays.length) {
+    container.innerHTML = '<div class="empty-state">Нет данных за этот месяц</div>';
     return;
   }
 
@@ -677,45 +604,58 @@ function renderMonth() {
     weeks[wk].push(s);
   });
 
-  let monthTotal = 0;
-  let monthMins = 0;
+  let monthTotal = 0, monthMins = 0;
   let html = '';
 
   Object.keys(weeks).sort().forEach(wk => {
     const wShifts = weeks[wk];
     const wPay = wShifts.reduce((s,x) => s+x.pay, 0);
     const wMins = wShifts.reduce((s,x) => s+x.paidMins, 0);
-    monthTotal += wPay;
-    monthMins += wMins;
-
+    monthTotal += wPay; monthMins += wMins;
     const wStart = new Date(wk);
     const wEnd = new Date(wk);
     wEnd.setDate(wStart.getDate() + 6);
     const label = `${wStart.toLocaleDateString('ru',{day:'numeric',month:'short'})} — ${wEnd.toLocaleDateString('ru',{day:'numeric',month:'short'})}`;
-
     html += `<div class="month-week">
       <div class="month-week-header">${label} · ${wPay.toLocaleString('ru')} ₽ · ${formatMins(wMins)}</div>`;
-
     wShifts.forEach(s => {
       const d = new Date(s.date);
       html += `<div class="shift-item">
         <div class="shift-info">
           <div class="shift-date">${DAYS_RU[d.getDay()]}, ${d.toLocaleDateString('ru',{day:'numeric',month:'short'})}</div>
           <div class="shift-time">${s.start} — ${s.end}</div>
-          <div class="shift-meta">${formatMins(s.totalMins)} факт · оплач ${formatMins(s.paidMins)}${s.lunches ? ` · 🍔${s.lunches}` : ''}</div>
+          <div class="shift-meta">${formatMins(s.totalMins)} факт · оплач ${formatMins(s.paidMins)}${s.lunches ? ` · 🍔${s.lunches}` : ''} · ${s.rate} руб/ч</div>
         </div>
-        <div class="shift-pay">
-          <div class="amount">${s.pay.toLocaleString('ru')} ₽</div>
+        <div class="shift-actions">
+          <div class="shift-pay-amount">${s.pay.toLocaleString('ru')} ₽</div>
         </div>
       </div>`;
     });
     html += '</div>';
   });
 
-  html += `<div class="week-total-bar">
-    <span class="lbl">Итого за месяц</span>
-    <span class="val">${monthTotal.toLocaleString('ru')} ₽</span>
-  </div>`;
+  // Итог + сравнение с выплатами
+  html += `<div class="total-bar"><span class="lbl">Начислено за месяц</span><span class="val">${monthTotal.toLocaleString('ru')} ₽</span></div>`;
+
+  if (monthPaydays.length) {
+    const diff = totalPaid - monthTotal;
+    const diffColor = diff >= 0 ? 'green' : 'red';
+    const diffSign = diff >= 0 ? '+' : '';
+    html += `<div class="compare-box">
+      <div class="card-title" style="margin-bottom:8px">💰 Выплаты за месяц</div>`;
+    monthPaydays.forEach((p,i) => {
+      const d = new Date(p.date);
+      html += `<div class="compare-row">
+        <span class="clbl">${d.toLocaleDateString('ru',{day:'numeric',month:'short'})}${p.note ? ' · '+p.note : ''}</span>
+        <span class="cval blue">${p.amount.toLocaleString('ru')} ₽</span>
+      </div>`;
+    });
+    html += `<div class="divider"></div>
+      <div class="compare-row"><span class="clbl">Начислено по сменам</span><span class="cval green">${monthTotal.toLocaleString('ru')} ₽</span></div>
+      <div class="compare-row"><span class="clbl">Получено на руки</span><span class="cval blue">${totalPaid.toLocaleString('ru')} ₽</span></div>
+      <div class="compare-row"><span class="clbl">Разница</span><span class="cval ${diffColor}">${diffSign}${diff.toLocaleString('ru')} ₽</span></div>
+    </div>`;
+  }
 
   container.innerHTML = html;
 }
@@ -726,7 +666,6 @@ function renderAllShifts() {
     container.innerHTML = '<div class="empty-state">Смен пока нет. Добавь первую!</div>';
     return;
   }
-
   container.innerHTML = [...shifts].reverse().map((s, ri) => {
     const idx = shifts.length - 1 - ri;
     const d = new Date(s.date);
@@ -734,11 +673,14 @@ function renderAllShifts() {
       <div class="shift-info">
         <div class="shift-date">${DAYS_RU[d.getDay()]}, ${d.toLocaleDateString('ru',{day:'numeric',month:'long'})}</div>
         <div class="shift-time">${s.start} — ${s.end}</div>
-        <div class="shift-meta">${formatMins(s.totalMins)} факт · оплач ${formatMins(s.paidMins)}${s.lunches ? ` · 🍔${s.lunches}` : ''}</div>
+        <div class="shift-meta">${formatMins(s.totalMins)} факт · оплач ${formatMins(s.paidMins)}${s.lunches ? ` · 🍔${s.lunches}` : ''} · ${s.rate} руб/ч</div>
       </div>
-      <div class="shift-pay">
-        <div class="amount">${s.pay.toLocaleString('ru')} ₽</div>
-        <button class="btn btn-danger" onclick="deleteShift(${idx})">✕</button>
+      <div class="shift-actions">
+        <div class="shift-pay-amount">${s.pay.toLocaleString('ru')} ₽</div>
+        <div class="btn-row">
+          <button class="btn btn-edit" onclick="openEdit(${idx})">✏️</button>
+          <button class="btn btn-danger" onclick="deleteShift(${idx})">✕</button>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -746,24 +688,58 @@ function renderAllShifts() {
 
 function renderAllTime() {
   if (!shifts.length) {
-    document.getElementById('alltime-total').textContent = '0 ₽';
+    ['alltime-total','alltime-avg'].forEach(id => document.getElementById(id).textContent = '0 ₽');
     document.getElementById('alltime-shifts').textContent = '0';
     document.getElementById('alltime-hours').textContent = '0ч';
     document.getElementById('alltime-burgers').textContent = '0 🍔';
-    document.getElementById('alltime-avg').textContent = '0 ₽';
     return;
   }
-
   const total = shifts.reduce((s,x) => s+x.pay, 0);
   const totalMins = shifts.reduce((s,x) => s+x.paidMins, 0);
   const totalLunches = shifts.reduce((s,x) => s+x.lunches, 0);
   const avg = Math.round(total / shifts.length);
-
   document.getElementById('alltime-total').textContent = total.toLocaleString('ru') + ' ₽';
   document.getElementById('alltime-shifts').textContent = shifts.length;
   document.getElementById('alltime-hours').textContent = formatMins(totalMins);
   document.getElementById('alltime-burgers').textContent = totalLunches + ' 🍔';
   document.getElementById('alltime-avg').textContent = avg.toLocaleString('ru') + ' ₽';
+}
+
+function renderSettings() {
+  // Rate history
+  const rh = document.getElementById('rate-history');
+  rh.innerHTML = [...rates].reverse().map((r, ri) => {
+    const idx = rates.length - 1 - ri;
+    const d = new Date(r.date);
+    return `<div class="rate-item">
+      <div>
+        <div class="rate-val">${r.rate} руб/ч</div>
+        <div class="rate-date">с ${d.toLocaleDateString('ru',{day:'numeric',month:'long',year:'numeric'})}</div>
+      </div>
+      <button class="btn btn-danger" onclick="deleteRate(${idx})">✕</button>
+    </div>`;
+  }).join('');
+
+  // Payday list
+  const pl = document.getElementById('payday-list');
+  if (!paydays.length) {
+    pl.innerHTML = '<div class="empty-state">Выплат пока нет</div>';
+    return;
+  }
+  pl.innerHTML = [...paydays].reverse().map((p, ri) => {
+    const idx = paydays.length - 1 - ri;
+    const d = new Date(p.date);
+    return `<div class="payday-item">
+      <div>
+        <div class="pd-date">${d.toLocaleDateString('ru',{day:'numeric',month:'long',year:'numeric'})}</div>
+        ${p.note ? `<div class="pd-note">${p.note}</div>` : ''}
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="pd-amount">${p.amount.toLocaleString('ru')} ₽</div>
+        <button class="btn btn-danger" onclick="deletePayday(${idx})">✕</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function renderAll() {
@@ -774,18 +750,19 @@ function renderAll() {
 }
 
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((t,i) => {
-    const names = ['week','month','alltime','add'];
-    t.classList.toggle('active', names[i] === name);
-  });
+  const names = ['week','month','alltime','add','settings'];
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', names[i] === name));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
 }
 
-// Дефолтная дата — сегодня
+// Init
 document.getElementById('inp-date').value = dateKey(new Date());
-
+document.getElementById('inp-rate-date').value = dateKey(new Date());
+document.getElementById('inp-pd-date').value = dateKey(new Date());
+updateRateLabel();
 renderAll();
+renderSettings();
 </script>
 </body>
 </html>
